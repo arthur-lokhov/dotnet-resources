@@ -1,0 +1,61 @@
+site_name: Справочник C#/.NET разработчика
+site_description: Справочник C#/.NET разработчика
+site_author: arthur-lokhov
+site_url: https://arthur-lokhov.github.io/dotnet-resources
+extra:
+  homepage: https://arthur-lokhov.github.com/dotnet-resources
+  consent:
+    title: Использование cookies
+    accent:
+      - accept
+      - manage
+      - reject
+    description: >-
+      Мы используем cookies для распознавания ваших повторных посещений и предпочтений, а также для измерения эффективности нашей документации и того, насколько легко пользователи находят нужную информацию. Согласившись, вы помогаете нам сделать сайт лучше и удобнее.
+copyright: >
+  Copyright &copy; 2024 Справочник C#/.NET разработчика — <a href="#__consent">Изменить настройки cookies</a>
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  language: ru
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - navigation.sections
+    - search.suggest
+    - header.autohide
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  palette:
+    scheme: slate # default - light, slate - dark
+    primary: deep purple # Primary color
+    accent: cyan # Accent color
+  font:
+    text: Fira Code
+plugins:
+  - privacy
+  - search
+  - tags
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+nav:
+  - Главная: index.md
