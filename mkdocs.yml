@@ -3,7 +3,7 @@ site_description: Справочник C#/.NET разработчика
 site_author: arthur-lokhov
 site_url: https://arthur-lokhov.github.io/dotnet-resources
 extra:
-  homepage: https://arthur-lokhov.github.com/dotnet-resources
+  homepage: https://arthur-lokhov.github.io/dotnet-resources
   consent:
     title: Использование cookies
     accent:
