@@ -18,3 +18,5 @@ hide:
 [Детальный гайд по установке Debian](./debian.md).
 
 [Ventoy - мультизагрузочная флешка](./ventoy.md).
+
+[Обновление прошивки клавиатуры от Ergohaven через Vial](./vial_keyboard_boot.md)

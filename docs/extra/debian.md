@@ -375,6 +375,33 @@ sudo nala install -y \
 | `simplescreenrecorder` | Минималистичная программа для записи экрана        |
 | `kdenlive`             | Мощный видео-редактор с простым интерфейсом        |
 
+Также есть ряд приложений, которые надо ставить вручную.
+
+**OnlyOffice** - офисный пакет, альтернатива **LibreOffice**:
+
+```bash
+wget https://github.com/ONLYOFFICE/DesktopEditors/releases/latest/download/onlyoffice-desktopeditors_amd64.deb
+sudo nala install onlyoffice-desktopeditors_amd64.deb
+rm -rf onlyoffice-desktopeditors_amd64.deb
+```
+
+**Vial** - конфигуратор для клавиатура на основе QMK:
+
+```bash
+wget https://github.com/vial-kb/vial-gui/releases/download/v0.7.3/Vial-v0.7.3-x86_64.AppImage
+sudo chmod +x ./Vial-v0.7.3-x86_64.AppImage
+export USER_GID=`id -g`; sudo --preserve-env=USER_GID sh -c 'echo "KERNEL==\"hidraw*\", SUBSYSTEM==\"hidraw\", ATTRS{serial}==\"*vial:f64c2b3c*\", MODE=\"0660\", GROUP=\"$USER_GID\", TAG+=\"uaccess\", TAG+=\"udev-acl\"" > /etc/udev/rules.d/99-vial.rules && udevadm control --reload && udevadm trigger'
+./Vial-v0.7.3-x86_64.AppImage
+```
+
+**Nekoray** - клиент для Xray:
+
+```bash
+wget https://github.com/MatsuriDayo/nekoray/releases/download/4.0.1/nekoray-4.0.1-2024-12-12-debian-x64.deb
+sudo nala install ./nekoray-4.0.1-2024-12-12-debian-x64.deb
+rm -rf nekoray-4.0.1-2024-12-12-debian-x64.deb
+```
+
 ### 🎨 Кастомизация внешнего вида GUI-приложений
 
 Для настройки внешнего вида приложений рекомендуется установить утилиты для управления темами и иконками как для GTK, так и для Qt.
@@ -409,4 +436,29 @@ sudo mkdir /usr/share/fonts/UbuntuMonoNF
 sudo cp um/*.ttf /usr/share/fonts/UbuntuMonoNF/
 sudo fc-cache -fv
 rm -rf um
+```
+
+---
+
+## 🗂️ Установка и применение dotfiles
+
+**Dotfiles** — это конфигурационные файлы, в которых хранятся персональные настройки оболочки, редакторов, утилит и оконного менеджера.
+
+### 🔗 Установка dotfiles через stow
+
+Убедитесь, что ваши dotfiles уже загружены в `~/.dotfiles`. Затем выполните:
+
+```bash
+cd ~/.dotfiles
+stow .
+```
+
+### ✅ Установка моих dotfiles
+
+Если у тебя нету своих dotfiles, то можешь воспользоваться моими:
+
+```bash
+git clone https://github.com/arthur-lokhov/debian-dev.git ~/.dotfiles
+cd ~/.dotfiles
+./install.sh
 ```
