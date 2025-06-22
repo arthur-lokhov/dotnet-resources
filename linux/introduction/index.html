@@ -1,0 +1,1012 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Справочник C#/.NET разработчика">
+      
+      
+        <meta name="author" content="arthur-lokhov">
+      
+      
+        <link rel="canonical" href="https://arthur-lokhov.github.io/dotnet-resources/linux/introduction/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../architecture/">
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Введение в Linux - Справочник C#/.NET разработчика</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.10d8c5b7.css">
+        <style>:root{--md-text-font:"Fira Code";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linux" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="https://arthur-lokhov.github.io/dotnet-resources" title="Справочник C#/.NET разработчика" class="md-header__button md-logo" aria-label="Справочник C#/.NET разработчика" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Справочник C#/.NET разработчика
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Введение в Linux
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  🐧 GNU/Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://arthur-lokhov.github.io/dotnet-resources" title="Справочник C#/.NET разработчика" class="md-nav__button md-logo" aria-label="Справочник C#/.NET разработчика" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Справочник C#/.NET разработчика
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Главная
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    🐧 GNU/Linux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🐧 GNU/Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Введение в Linux
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Введение в Linux
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linux-gnu-unix-" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Что такое Linux: ядро, GNU и Unix-подобные системы
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Что такое Linux: ядро, GNU и Unix-подобные системы">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unix-" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unix-подобные системы: философия
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      🆚 Отличие Linux от Windows: парадигмы и системная модель
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Дистрибутивы: классификация и основные отличия
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠 Подготовка среды: где учиться, где деплоить
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠 Подготовка среды: где учиться, где деплоить">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bare Metal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Виртуальные машины (VM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsl2-windows-subsystem-for-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 WSL2 (Windows Subsystem for Linux)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lxdcontainers" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 LXD/containers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 Что дальше
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Архитектура системы Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linux-gnu-unix-" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔍 Что такое Linux: ядро, GNU и Unix-подобные системы
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔍 Что такое Linux: ядро, GNU и Unix-подобные системы">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unix-" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unix-подобные системы: философия
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#linux-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      🆚 Отличие Linux от Windows: парадигмы и системная модель
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Дистрибутивы: классификация и основные отличия
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠 Подготовка среды: где учиться, где деплоить
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🛠 Подготовка среды: где учиться, где деплоить">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bare Metal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vm" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Виртуальные машины (VM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wsl2-windows-subsystem-for-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 WSL2 (Windows Subsystem for Linux)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lxdcontainers" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 LXD/containers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 Что дальше
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+        <a href="../../tags/#tag:linux" class="md-tag">Linux</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="linux">📦 Введение в Linux</h1>
+<p>Linux: ядро, GNU, философия UNIX-подобных систем и основы экосистемы</p>
+<hr />
+<h2 id="linux-gnu-unix-">🔍 Что такое Linux: ядро, GNU и Unix-подобные системы</h2>
+<p>Когда мы говорим «Linux», на практике мы имеем в виду не ядро, а целую экосистему.
+Однако технически <a href="https://git.kernel.org/">Linux</a> — это ядро: ядро монолитного типа, разработанное Линусом Торвальдсом в 1991 году.
+Оно реализует механизмы управления процессами, памятью, доступом к устройствам и файловой системой.</p>
+<p>Само по себе ядро — это лишь часть операционной системы.
+Чтобы сделать систему пригодной для повседневного использования, ему требуется окружение: утилиты, компиляторы, оболочки, библиотеки и т. д.
+Именно здесь вступает проект <a href="https://www.gnu.org/home.ru.html">GNU</a>, начатый Ричардом Столлманом в 1983 году.
+Инструменты GNU (<code>bash</code>, <code>coreutils</code>, <code>gcc</code>, <code>glibc</code> и пр.) исторически и практически составляют userspace в подавляющем большинстве дистрибутивов Linux.</p>
+<div class="admonition warning">
+<p class="admonition-title">GNU/Linux</p>
+<p>Фактически, большинство дистрибутивов — это «GNU/Linux» системы, но в повседневной речи мы опускаем префикс.</p>
+</div>
+<h3 id="unix-">Unix-подобные системы: философия</h3>
+<p>Linux не является наследником оригинального UNIX, но следует его <strong>дизайн-философии</strong>:</p>
+<ul>
+<li><strong>Everything is a file</strong> — устройства, сокеты, процессы представлены как файлы;</li>
+<li><strong>Модульность и простота</strong> — каждое приложение делает одну вещь и делает её хорошо;</li>
+<li><strong>Сцепление через stdin/stdout</strong> — возможность связывать программы в пайплайны (<code>|</code>).</li>
+</ul>
+<p>В отличие от проприетарных решений, таких как Windows, модель Linux основывается на открытости, прозрачности и контроле пользователя.</p>
+<hr />
+<h2 id="linux-windows">🆚 Отличие Linux от Windows: парадигмы и системная модель</h2>
+<table>
+<thead>
+<tr>
+<th>Принцип</th>
+<th>Linux</th>
+<th>Windows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Архитектура</td>
+<td>Модульное монолитное ядро</td>
+<td>Гибридное ядро</td>
+</tr>
+<tr>
+<td>Конфигурация</td>
+<td>Текстовые файлы в <code>/etc</code></td>
+<td>Реестр(бинарные данные)</td>
+</tr>
+<tr>
+<td>Разделение прав</td>
+<td>Явная модель root/UID/GID</td>
+<td>ACL, SID, GPO</td>
+</tr>
+<tr>
+<td>Файловая модель</td>
+<td>Всё — файл, включая устройства</td>
+<td>Специальные API и абстракции</td>
+</tr>
+<tr>
+<td>Установка ПО</td>
+<td>Пакеты через пакетный менеджер</td>
+<td>MSI/EXE-инсталляторы</td>
+</tr>
+<tr>
+<td>Скриптование и shell</td>
+<td>POSIX shell, bash, zsh и др.</td>
+<td>PowerShell, bat-файлы</td>
+</tr>
+<tr>
+<td>Модель процессов</td>
+<td>fork/exec, signals</td>
+<td>CreateProcess(), Win32 API</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Про системный вызов</p>
+<p>В Linux системный вызов — это обычная часть API, а в Windows — часто скрыт за COM, WMI или сложной абстракцией.</p>
+<p>Linux упрощает отладку и автоматизацию.</p>
+</div>
+<hr />
+<h2 id="_1">📦 Дистрибутивы: классификация и основные отличия</h2>
+<p><strong>Дистрибутив Linux</strong> — это конкретный способ <strong>сборки и доставки ядра</strong> + <strong>userspace</strong> + <strong>пакетов</strong> + <strong>init-системы</strong>, адаптированный под цели: серверы, десктопы, контейнеры, встраиваемые системы и т. д.</p>
+<p>Главные ветки:</p>
+<ul>
+<li><strong>Debian-based</strong>: <code>.deb</code>, APT, systemd, ориентированы на стабильность и простоту.</li>
+<li><strong>RHEL-based</strong>: <code>.rpm</code>, DNF/YUM, SELinux по умолчанию, используются в корпорациях.</li>
+<li><strong>Прочие</strong>: Arch, Gentoo, Void и т. п.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Выбор дистрибутива</p>
+<p>Выбор дистрибутива влияет на пакетный менеджер, init-систему, директории конфигурации, а иногда и на структуру userspace.</p>
+<p>В данном руководстве по изучению Linux, будет рассматриваться <strong>Debian</strong>.</p>
+</div>
+<hr />
+<h2 id="_2">🛠 Подготовка среды: где учиться, где деплоить</h2>
+<p>Перед тем как перейти к архитектуре и практическим упражнениям, важно правильно выбрать и настроить рабочую среду, в которой ты будешь взаимодействовать с системой. От этого зависит уровень доступа, реализм симуляции, и насколько глубоко ты сможешь залезть "под капот".</p>
+<h3 id="bare-metal">🔹 Bare Metal</h3>
+<div class="admonition info">
+<p class="admonition-title">Когда используется</p>
+<p>Используется, когда:</p>
+<ul>
+<li>Нужно максимальное приближение к реальному серверу;</li>
+<li>Изучаешь низкоуровневые вещи: RAID, LVM, шифрование диска, PXE, UEFI/BIOS;</li>
+<li>Требуется полный контроль над ядром, загрузчиком и оборудованием;</li>
+<li>Проверяешь поведение при отказах питания, дисков, интерфейсов и т.д;</li>
+<li>Тестируешь производительность, I/O latency, сетевые карты, контроллеры.</li>
+</ul>
+</div>
+<p>⚙️ Установка:</p>
+<ol>
+<li>Загрузить ISO-образ на флешку через <code>dd</code> или <code>balenaEtcher</code>.</li>
+<li><strong>BIOS/UEFI</strong>: отключить Secure Boot, включить AHCI.</li>
+<li>Установка дистрибутива на жёсткий диск или SSD (разметка вручную — LVM, RAID, шифрование).</li>
+<li>Опционально — настроить PXE и сетевые загрузки (см. главу 14: <a href="./pxe.md">PXE</a>).</li>
+</ol>
+<p>✅ Преимущества:</p>
+<ul>
+<li>Максимальный контроль над железом, без виртуализационных прослоек;</li>
+<li>Идеален для работы с RAID-контроллерами, PXE-загрузкой, шиной PCI и BIOS/UEFI;</li>
+<li>Единственный способ точно проверить поведение при сбоях оборудования.</li>
+</ul>
+<h3 id="vm">🔹 Виртуальные машины (VM)</h3>
+<div class="admonition info">
+<p class="admonition-title">Когда используется</p>
+<p>Используется, когда:</p>
+<ul>
+<li>Нужна полноценная ОС в изолированной среде;</li>
+<li>Практикуешь systemd, юниты, PID-наблюдение, сеть (NAT/bridge), LVM, iptables;</li>
+<li>Удобно работать с несколькими средами: один хост → несколько ВМ;</li>
+<li>Хочешь иметь снапшоты, быстрое восстановление состояния;</li>
+<li>Отлаживаешь init, cron, systemctl, сетевую маршрутизацию.</li>
+</ul>
+</div>
+<p>⚙️ Установка:</p>
+<ol>
+<li>Установи <strong>VirtualBox</strong>, <strong>VMware Workstation</strong>, или <strong>libvirt + virt-manager</strong>.</li>
+<li>Создай новую виртуальную машину: 2+ ядра CPU, 2+ ГБ RAM, 20+ ГБ диска.</li>
+<li>Примонтируй ISO-файл Linux-дистрибутива, установи систему как обычно.</li>
+<li>Настрой сетевой режим (bridge, NAT) и снапшоты.</li>
+</ol>
+<p>✅ Преимущества:</p>
+<ul>
+<li><strong>Изоляция</strong>: не затрагивает хостовую ОС;</li>
+<li><strong>Поддержка снапшотов</strong>: удобно откатывать конфигурации;</li>
+<li><strong>Широкая совместимость</strong> с разными образами и hypervisor'ами.</li>
+</ul>
+<!--TODO: Add link to virtualization.md-->
+
+<h3 id="wsl2-windows-subsystem-for-linux">🔹 WSL2 (Windows Subsystem for Linux)</h3>
+<div class="admonition info">
+<p class="admonition-title">Когда используется</p>
+<p>Используется, когда:</p>
+<ul>
+<li>Основная ОС — Windows, но хочется использовать Linux-инструменты;</li>
+<li>Пишешь shell-скрипты, запускаешь cron-like задачи, тестируешь CLI;</li>
+<li>Используешь apt, gcc, make, ansible, ssh, git, grep, jq и т.п;</li>
+<li>Нужно быстрое окружение для девелопмента (например, на Python, Ruby, Rust, Go).</li>
+</ul>
+<p>Не подходит, если:</p>
+<ul>
+<li>Нужно работать с systemd, юнитами, grub, загрузчиком, PXE, ядром и initramfs;</li>
+<li>Требуется полноценная работа с сетевыми интерфейсами и виртуальными bridge'ами.</li>
+</ul>
+</div>
+<p>⚙️ Установка:</p>
+<ol>
+<li>Включи WSL и WSL2: <code>wsl --install</code> (или вручную: включи компоненты "Virtual Machine Platform" и "WSL").</li>
+<li>Установи дистрибутив через Microsoft Store (Ubuntu, Debian и др.).</li>
+<li>Настрой systemd (для новых версий): отредактируй <code>.wslconfig</code> и <code>/etc/wsl.conf</code>.</li>
+</ol>
+<p>✅ Преимущества:</p>
+<ul>
+<li>Интеграция с Windows: доступ к файлам, Windows Terminal, VS Code Remote;</li>
+<li>Поддержка большинства CLI-инструментов;</li>
+<li>Поддержка systemd (начиная с Windows 11, сборка 22000+).</li>
+</ul>
+<p>⚠️ Ограничения:</p>
+<ul>
+<li>Сложнее работать с ядром напрямую: нет прямого доступа к модулям, загрузчику, initramfs;</li>
+<li>Некоторые сетевые сценарии (bridge, PXE, LXD) ограничены;</li>
+<li>Работает внутри Hyper-V (влияет на производительность на некоторых CPU).</li>
+</ul>
+<blockquote>
+<p>🚫 WSL не рекомендуется для изучения Linux.</p>
+</blockquote>
+<h3 id="lxdcontainers">🔹 LXD/containers</h3>
+<div class="admonition info">
+<p class="admonition-title">Когда используется</p>
+<p>Используется, когда:</p>
+<ul>
+<li>Хочешь запускать полноценные Linux-системы с systemd и сетями — но быстро, в изоляции;</li>
+<li>Учишься работать с init, PID namespace, сетевыми bridge'ами, ограничениями ресурсов;</li>
+<li>Тестируешь автоматизацию развертывания, CI/CD пайплайны, кастомные образы;</li>
+<li>Нужна легковесная альтернатива ВМ с почти тем же функционалом;</li>
+<li>Тестируешь миграцию окружений, снапшоты, provisioning.</li>
+</ul>
+</div>
+<p>⚙️ Установка:</p>
+<ol>
+<li>Установи lxd (обычно через snap): <code>sudo snap install lxd</code>.</li>
+<li>Инициализируй конфигурацию: <code>sudo lxd init</code> (выбор сетей, хранилища, настройки по умолчанию).</li>
+<li>Запусти контейнер: <code>lxc launch images:ubuntu/22.04 my-container</code>.</li>
+<li>Внутри доступен полноценный systemd, можно работать с journald, сервисами и networkd.</li>
+</ol>
+<p>✅ Преимущества:</p>
+<ul>
+<li>Почти мгновенный запуск, низкие накладные расходы;</li>
+<li>Возможность запуска полноценных систем с systemd внутри контейнеров;</li>
+<li>Встроенные средства для snapshot'ов, сетей, ограничений по ресурсам.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Системы полуфабрикаты</p>
+<p>Не стоит учить Linux на "системах-полуфабрикатах" (как Termux или встроенные BusyBox-образы), если вы хотите понимать, как работает ОС под капотом.</p>
+</div>
+<hr />
+<h2 id="_3">🧭 Что дальше</h2>
+<ol>
+<li>Установите <strong>Debian</strong> на основной компьютер или виртуальную машину.</li>
+<li>Запустите терминал, <code>Ctrl+Alt+T</code> в большинстве дистрибутивов.</li>
+<li>Введите <code>uname -a</code>, получите информацию о ядре.</li>
+<li>Узнайте информацию о команде <code>uname</code>, используя <code>man</code>.</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Справочник C#/.NET разработчика — <a href="#__consent">Изменить настройки cookies</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Использование cookies</h4>
+<p>Мы используем cookies для распознавания ваших повторных посещений и предпочтений, а также для измерения эффективности нашей документации и того, насколько легко пользователи находят нужную информацию. Согласившись, вы помогаете нам сделать сайт лучше и удобнее.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Принять</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Управлять настройками</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tabs", "navigation.top", "navigation.tracking", "navigation.sections", "search.suggest", "header.autohide", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

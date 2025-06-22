@@ -1,0 +1,955 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Справочник C#/.NET разработчика">
+      
+      
+        <meta name="author" content="arthur-lokhov">
+      
+      
+        <link rel="canonical" href="https://arthur-lokhov.github.io/dotnet-resources/workflow/">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Настройка рабочего окружения для .NET - Справочник C#/.NET разработчика</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.10d8c5b7.css">
+        <style>:root{--md-text-font:"Fira Code";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#net" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="https://arthur-lokhov.github.io/dotnet-resources" title="Справочник C#/.NET разработчика" class="md-header__button md-logo" aria-label="Справочник C#/.NET разработчика" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Справочник C#/.NET разработчика
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Настройка рабочего окружения для .NET
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../linux/introduction/" class="md-tabs__link">
+          
+  
+  
+  🐧 GNU/Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://arthur-lokhov.github.io/dotnet-resources" title="Справочник C#/.NET разработчика" class="md-nav__button md-logo" aria-label="Справочник C#/.NET разработчика" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    Справочник C#/.NET разработчика
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Главная
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    🐧 GNU/Linux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🐧 GNU/Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux/introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Введение в Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Архитектура системы Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#linux-" class="md-nav__link">
+    <span class="md-ellipsis">
+      🐧 Выбор Linux-дистрибутива
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐧 Выбор Linux-дистрибутива">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 На что обратить внимание:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠️ Популярные варианты
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#git-ssh" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Настройка Git и SSH
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 Настройка Git и SSH">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      📦 Шаг 1: Базовая настройка Git
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📦 Шаг 1: Базовая настройка Git">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#git" class="md-nav__link">
+    <span class="md-ellipsis">
+      Установка Git
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Глобальная конфигурация
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Шаг 2: Поддержка нескольких аккаунтов/проектов
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧠 Шаг 2: Поддержка нескольких аккаунтов/проектов">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ssh-" class="md-nav__link">
+    <span class="md-ellipsis">
+      Создание разных SSH-ключей
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sshconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка ~/.ssh/config
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ssh-agent-zshrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Автоматический запуск ssh-agent и загрузка ключей в ~/.zshrc
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-gitconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧱 Шаг 3: Профильный .gitconfig
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧱 Шаг 3: Профильный .gitconfig">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gitconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~/.gitconfig (глобально)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitconfig-personal" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~/.gitconfig-personal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitconfig-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~/.gitconfig-work
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟢 Установка Node.js
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#net-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      🟣 Установка .NET SDK
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-minikube-helm" class="md-nav__link">
+    <span class="md-ellipsis">
+      🐳 Docker, Minikube, Helm
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+  
+
+
+
+
+<h1 id="net">🧰 Настройка рабочего окружения для .NET</h1>
+<p>Эта страница поможет вам подготовить удобное, современное и эффективное окружение для разработки .NET-приложений в Linux-среде.</p>
+<p>Здесь рассматриваются:</p>
+<ul>
+<li>терминал и инструменты командной строки;</li>
+<li>базовые утилиты разработчика;</li>
+<li>установка Docker, Kubernetes (Minikube) и Helm;</li>
+<li>настройка отображения и удобства работы.</li>
+</ul>
+<hr />
+<h2 id="linux-">🐧 Выбор Linux-дистрибутива</h2>
+<p>Выбор дистрибутива напрямую влияет на удобство работы, доступность пакетов, стабильность и документацию.
+Нет "лучшего" дистрибутива для всех, но есть — подходящий <strong>для ваших целей и опыта</strong>.</p>
+<h3 id="_1">🧭 На что обратить внимание:</h3>
+<table>
+<thead>
+<tr>
+<th>Фактор</th>
+<th>Почему это важно</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Стабильность пакетов</strong></td>
+<td>Для DevOps-инфраструктуры важно, чтобы всё было предсказуемо.</td>
+</tr>
+<tr>
+<td><strong>Поддержка Docker и Kubernetes</strong></td>
+<td>Не во всех дистрибутивах эти пакеты из коробки.</td>
+</tr>
+<tr>
+<td><strong>Скорость обновлений</strong></td>
+<td>Хотите bleeding edge? Или стабильность с минимумом сюрпризов?</td>
+</tr>
+<tr>
+<td><strong>Сообщество и документация</strong></td>
+<td>Важно при поиске решений и примеров в интернете.</td>
+</tr>
+<tr>
+<td><strong>Управление пакетами</strong></td>
+<td><code>apt</code>, <code>dnf</code>, <code>pacman</code> — разные подходы, разные привычки.</td>
+</tr>
+<tr>
+<td><strong>Системные особенности</strong></td>
+<td>Например, использование systemd, AppArmor, SELinux и пр.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">🛠️ Популярные варианты</h3>
+<table>
+<thead>
+<tr>
+<th>Дистрибутив</th>
+<th>Подходит для</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ubuntu</strong></td>
+<td>Новичков и инфраструктуры</td>
+<td>Хорошая поддержка Docker, документация</td>
+</tr>
+<tr>
+<td><strong>Debian</strong></td>
+<td>Стабильной среды разработки и DevOps</td>
+<td>Минимум лишнего, предсказуемость, но пакеты старее</td>
+</tr>
+<tr>
+<td><strong>Fedora</strong></td>
+<td>Тех, кто хочет быть на острие</td>
+<td>Быстрые обновления, SELinux по умолчанию</td>
+</tr>
+<tr>
+<td><strong>openSUSE</strong></td>
+<td>Корпоративной сборки/DevOps</td>
+<td>YaST, Snapper, разделение Tumbleweed/Leap</td>
+</tr>
+<tr>
+<td><strong>Arch</strong></td>
+<td>Продвинутых пользователей</td>
+<td>Максимальный контроль и новизна пакетов</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Автор использует: Debian</p>
+<p>Причины:</p>
+<ul>
+<li>Стабильная и минималистичная основа;</li>
+<li>Отлично подходит под инфраструктуру и серверную часть;</li>
+<li>Прост в автоматизации и настройке;</li>
+<li>Работает "как надо" — без избыточных решений.</li>
+</ul>
+<p>Настройку Debian от автора можно найти <a href="https://github.com/arthur-lokhov/debian-dev">здесь</a>.</p>
+</div>
+<hr />
+<h2 id="git-ssh">🔐 Настройка Git и SSH</h2>
+<p>Правильная настройка Git и SSH экономит часы времени и избавляет от боли при работе с несколькими репозиториями, ключами, CI/CD и pull requests.</p>
+<h3 id="1-git">📦 Шаг 1: Базовая настройка Git</h3>
+<h4 id="git">Установка Git</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git<span class="w">       </span><span class="c1"># Debian/Ubuntu</span>
+</code></pre></div>
+<h4 id="_3">Глобальная конфигурация</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Имя Фамилия&quot;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;email@example.com&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Цветной вывод, более понятный лог, aliases</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>color.ui<span class="w"> </span>auto
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.editor<span class="w"> </span><span class="s2">&quot;nvim&quot;</span><span class="w">  </span><span class="c1"># или &quot;nano&quot;, &quot;code --wait&quot;, &quot;micro&quot;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.st<span class="w"> </span>status
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.co<span class="w"> </span>checkout
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>alias.lg<span class="w"> </span><span class="s2">&quot;log --oneline --graph --all&quot;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># https://github.com/dandavison/delta</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>core.pager<span class="w"> </span>delta
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>interactive.diffFilter<span class="w"> </span><span class="s1">&#39;delta --color-only&#39;</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>delta.navigate<span class="w"> </span><span class="nb">true</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>git<span class="w"> </span>config<span class="w"> </span>--global<span class="w"> </span>merge.conflictStyle<span class="w"> </span>zdiff3
+</code></pre></div>
+<h3 id="2">🧠 Шаг 2: Поддержка нескольких аккаунтов/проектов</h3>
+<p>Если ты работаешь, например, и на <strong>GitHub (лично)</strong>, и на <strong>GitLab (компания)</strong> — нужно <strong>разделять ключи и конфиги</strong>.</p>
+<h4 id="ssh-">Создание разных SSH-ключей</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Для GitHub</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;yourname@github.com&quot;</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519_github
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Для GitLab (рабочий)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;you@company.com&quot;</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519_gitlab
+</code></pre></div>
+<h4 id="sshconfig">Настройка <code>~/.ssh/config</code></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Host github.com
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    HostName github.com
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    User git
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    IdentityFile ~/.ssh/id_ed25519_github
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    IdentitiesOnly yes
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>Host gitlab.company
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    HostName gitlab.company.com
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    User git
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    IdentityFile ~/.ssh/id_ed25519_gitlab
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    IdentitiesOnly yes
+</code></pre></div>
+<p>Теперь ты можешь использовать:</p>
+<ul>
+<li><em>git@github.com:user/repo.git</em> — будет использовать личный ключ;</li>
+<li><em>git@gitlab.company:team/repo.git</em> — будет использовать рабочий ключ.</li>
+</ul>
+<h4 id="ssh-agent-zshrc">Автоматический запуск <code>ssh-agent</code> и загрузка ключей в <code>~/.zshrc</code></h4>
+<p>В <code>.zshrc</code> файл можно добавить(в моем конфиге уже есть) следующую строку:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">eval</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>ssh-agent<span class="w"> </span>-s<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+</code></pre></div>
+<h3 id="3-gitconfig">🧱  Шаг 3: Профильный .gitconfig</h3>
+<p>Создай конфигурации по проектам.</p>
+<h4 id="gitconfig"><code>~/.gitconfig</code> (глобально)</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">[includeIf &quot;gitdir:~/Projects/Personal/&quot;]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="na">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/.gitconfig-personal</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">[includeIf &quot;gitdir:~/Projects/Work/&quot;]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">    </span><span class="na">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/.gitconfig-work</span>
+</code></pre></div>
+<h4 id="gitconfig-personal"><code>~/.gitconfig-personal</code></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">[user]</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">John Dev</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="na">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">john@devmail.com</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">[core]</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="na">sshCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ssh -i ~/.ssh/id_ed25519_github&quot;</span>
+</code></pre></div>
+<h4 id="gitconfig-work"><code>~/.gitconfig-work</code></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">[user]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="na">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">John Work</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="na">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">john@company.com</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">[core]</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="na">sshCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;ssh -i ~/.ssh/id_ed25519_gitlab&quot;</span>
+</code></pre></div>
+<hr />
+<h2 id="nodejs">🟢 Установка Node.js</h2>
+<p>Установка будет производиться через <strong>Node Version Manager</strong>.
+<code>nvm</code> позволяет удобно управлять несколькими версиями Node.js, устанавливать LTS или актуальные релизы, переключаться между ними для разных проектов.</p>
+<p>Установка <code>nvm</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span>-o-<span class="w"> </span>https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</code></pre></div>
+<p>Установка Node.js через <code>nvm</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nvm<span class="w"> </span>install<span class="w"> </span>--lts
+</code></pre></div>
+<hr />
+<h2 id="net-sdk">🟣 Установка .NET SDK</h2>
+<p>Установка будет производиться через <strong>dotnet-install.sh</strong>.
+Это рекомендованный кросс-дистрибутивный способ от Microsoft — особенно если вы не хотите устанавливать .NET из системных репозиториев.</p>
+<p>Перед тем, как начать, нужно скачать скрипт установки.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.dotnet<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/.dotnet
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>curl<span class="w"> </span>-L<span class="w"> </span>https://dot.net/v1/dotnet-install.sh<span class="w"> </span>-o<span class="w"> </span>dotnet-install.sh
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>dotnet-install.sh
+</code></pre></div>
+<p>После чего мы можем установить последнюю стабильную и LTS версии:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>./dotnet-install.sh<span class="w"> </span>--channel<span class="w"> </span>STS
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>./dotnet-install.sh<span class="w"> </span>--channel<span class="w"> </span>LTS
+</code></pre></div>
+<p>А также установим необходимые инструменты:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>dotnet<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>--global<span class="w"> </span>dotnet-ef
+</code></pre></div>
+<hr />
+<h2 id="docker-minikube-helm">🐳 Docker, Minikube, Helm</h2>
+<p>Установка Docker:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>dockerd-rootless-setuptool.sh<span class="w"> </span>install
+</code></pre></div>
+<p>Установка Kubernetes и Minikube:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>curl<span class="w"> </span>-LO<span class="w"> </span>https://dl.k8s.io/release/<span class="sb">`</span>curl<span class="w"> </span>-LS<span class="w"> </span>https://dl.k8s.io/release/stable.txt<span class="sb">`</span>/bin/linux/amd64/kubectl
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>chmod<span class="w"> </span>+x<span class="w"> </span>./kubectl
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>sudo<span class="w"> </span>mv<span class="w"> </span>./kubectl<span class="w"> </span>/usr/local/bin/kubectl
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>curl<span class="w"> </span>-Lo<span class="w"> </span>minikube<span class="w"> </span>https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>minikube
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>sudo<span class="w"> </span>install<span class="w"> </span>minikube<span class="w"> </span>/usr/local/bin/
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>rm<span class="w"> </span>-rf<span class="w"> </span>minikube
+</code></pre></div>
+<p>Установка Helm:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>curl<span class="w"> </span>https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3<span class="w"> </span><span class="p">|</span><span class="w"> </span>bash
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Подробнее о инструментах</p>
+<p>Подробную информацию о данных инструментах можно прочитать в соответствующих разделах:</p>
+<ol>
+<li><a href="./containers/docker/installation.md">Docker</a></li>
+<li><a href="./containers/k8s/">Kubernetes</a></li>
+<li><a href="./containers/helm/">Helm</a></li>
+</ol>
+</div>
+<hr />
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Справочник C#/.NET разработчика — <a href="#__consent">Изменить настройки cookies</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Использование cookies</h4>
+<p>Мы используем cookies для распознавания ваших повторных посещений и предпочтений, а также для измерения эффективности нашей документации и того, насколько легко пользователи находят нужную информацию. Согласившись, вы помогаете нам сделать сайт лучше и удобнее.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Принять</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Управлять настройками</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tabs", "navigation.top", "navigation.tracking", "navigation.sections", "search.suggest", "header.autohide", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

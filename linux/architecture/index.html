@@ -1,0 +1,1311 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Справочник C#/.NET разработчика">
+      
+      
+        <meta name="author" content="arthur-lokhov">
+      
+      
+        <link rel="canonical" href="https://arthur-lokhov.github.io/dotnet-resources/linux/architecture/">
+      
+      
+        <link rel="prev" href="../introduction/">
+      
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Архитектура системы Linux - Справочник C#/.NET разработчика</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.10d8c5b7.css">
+        <style>:root{--md-text-font:"Fira Code";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linux" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href="https://arthur-lokhov.github.io/dotnet-resources" title="Справочник C#/.NET разработчика" class="md-header__button md-logo" aria-label="Справочник C#/.NET разработчика" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Справочник C#/.NET разработчика
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Архитектура системы Linux
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Главная
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../introduction/" class="md-tabs__link">
+          
+  
+  
+  🐧 GNU/Linux
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://arthur-lokhov.github.io/dotnet-resources" title="Справочник C#/.NET разработчика" class="md-nav__button md-logo" aria-label="Справочник C#/.NET разработчика" data-md-component="logo">
+      
+  <img src="../../assets/logo.png" alt="logo">
+
+    </a>
+    Справочник C#/.NET разработчика
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Главная
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    🐧 GNU/Linux
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🐧 GNU/Linux
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Введение в Linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Архитектура системы Linux
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Архитектура системы Linux
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kernelspace-vs-userspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Kernelspace vs Userspace
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Kernelspace vs Userspace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu-ring-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧿 Аппаратные уровни привилегий: CPU Ring Levels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernelspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠 Kernelspace (ядро)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Userspace (пользовательское пространство)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Взаимодействие между пространствами
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Основные компоненты системы
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ Основные компоненты системы">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧩 Ядро (Kernel)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init-pid-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Init-система (PID 1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Оболочка и библиотеки
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logind-" class="md-nav__link">
+    <span class="md-ellipsis">
+      👥 Logind - система управления сессиями
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Механизмы доступа и аутентификации
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 Механизмы доступа и аутентификации">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pam-pluggable-authentication-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛂 PAM (Pluggable Authentication Modules)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Polkit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auditd" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧾 Auditd — система аудита безопасности
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udev-" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Udev - менеджер устройств
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-bus-" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 D-Bus - механизм межпроцессного взаимодействия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔎 Итоговая картина: кто за что отвечает
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧩 Взаимодействие компонентов в потоке авторизации
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 Что дальше
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kernelspace-vs-userspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Kernelspace vs Userspace
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚙️ Kernelspace vs Userspace">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu-ring-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧿 Аппаратные уровни привилегий: CPU Ring Levels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kernelspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛠 Kernelspace (ядро)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#userspace" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Userspace (пользовательское пространство)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Взаимодействие между пространствами
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🏗️ Основные компоненты системы
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🏗️ Основные компоненты системы">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧩 Ядро (Kernel)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#init-pid-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Init-система (PID 1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Оболочка и библиотеки
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logind-" class="md-nav__link">
+    <span class="md-ellipsis">
+      👥 Logind - система управления сессиями
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔐 Механизмы доступа и аутентификации
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔐 Механизмы доступа и аутентификации">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pam-pluggable-authentication-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛂 PAM (Pluggable Authentication Modules)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polkit" class="md-nav__link">
+    <span class="md-ellipsis">
+      🛡️ Polkit
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auditd" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧾 Auditd — система аудита безопасности
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#udev-" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚙️ Udev - менеджер устройств
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-bus-" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔗 D-Bus - механизм межпроцессного взаимодействия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔎 Итоговая картина: кто за что отвечает
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧩 Взаимодействие компонентов в потоке авторизации
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧭 Что дальше
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+        <a href="../../tags/#tag:linux" class="md-tag">Linux</a>
+      
+    
+  </nav>
+
+
+
+<h1 id="linux">🧬 Архитектура системы Linux</h1>
+<p>В этой главе мы рассмотрим:</p>
+<ul>
+<li>Логическую архитектуру Linux как ОС.</li>
+<li>Составляющие и цепочку взаимодействия между компонентами (systemd → PAM → polkit → udev → kernel).</li>
+<li>Как устроена модель процессов и что происходит после запуска PID 1.</li>
+</ul>
+<hr />
+<h2 id="kernelspace-vs-userspace">⚙️ Kernelspace vs Userspace</h2>
+<p><strong>Linux</strong> — модульная, многослойная операционная система, построенная на чётком разграничении <strong>пространства ядра</strong> (kernelspace) и <strong>пользовательского пространства</strong> (userspace).</p>
+<h3 id="cpu-ring-levels">🧿 Аппаратные уровни привилегий: CPU Ring Levels</h3>
+<p>Чтобы понять информацию ниже и как происходит разделения пространств, надо разобраться в <strong>кольцах привилегий</strong>.</p>
+<p>Современные процессоры (x86/AMD64) реализуют <strong>многоуровневую модель защиты</strong> — так называемые <strong>кольца привилегий</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Ring</th>
+<th>Уровень привилегий</th>
+<th>Используется кем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Максимальный</td>
+<td>Ядро ОС (Kernelspace)</td>
+</tr>
+<tr>
+<td>1–2</td>
+<td>Промежуточные</td>
+<td>Почти не используются</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Минимальный</td>
+<td>Пользовательские процессы</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Ring 0</strong>: Полный доступ к оборудованию, памяти и CPU-инструкциям. Здесь выполняется ядро Linux;</li>
+<li><strong>Ring 3</strong>: Работают все пользовательские приложения, включая shell, браузеры и службы;</li>
+<li><strong>Переход из Ring 3 в Ring 0</strong> осуществляется через системные вызовы (<code>syscall</code>, <code>int 0x80</code>, <code>sysenter</code> и др.).</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Кольца привилегий в Linux</p>
+<p>Linux использует только <strong>два кольца</strong>: Ring 0 (ядро) и Ring 3 (всё остальное).</p>
+<p>Это упрощает архитектуру, но требует строго контролировать границы между ними.</p>
+</div>
+<h3 id="kernelspace">🛠 Kernelspace (ядро)</h3>
+<p><strong>Пространство ядра</strong> — зона с максимальными привилегиями (Ring 0), в которой работают:</p>
+<ul>
+<li><strong>Подсистемы ядра</strong>: управление памятью, файлами, процессами, сетью;</li>
+<li><strong>Драйверы устройств</strong> и <strong>аппаратные абстракции</strong>;</li>
+<li><strong>Механизмы изоляции</strong>: <code>cgroups</code>, <code>namespaces</code>;</li>
+<li><strong>Системные вызовы</strong> (например, <code>open()</code>, <code>write()</code>) — интерфейс взаимодействия с userspace.</li>
+</ul>
+<p>Примеры подсистем:</p>
+<ul>
+<li><code>VFS</code> — виртуальная файловая система.</li>
+<li><code>Netfilter</code> — фреймворк для фаерволов (iptables, nftables).</li>
+<li><code>Scheduler</code> — планировщик задач (CFS, RT).</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Kernel Panic</p>
+<p>Если в пространстве ядра возникнет ошибка, то она приведет к <strong>Kernel Panic</strong> - полной остановке системы.</p>
+</div>
+<h3 id="userspace">🚀 Userspace (пользовательское пространство)</h3>
+<p><strong>Пространство пользователя</strong> — всё, что не ядро: приложения, скрипты, shell, утилиты.
+Запускается в <strong>Ring 3</strong> — с ограниченными правами.</p>
+<p>Ключевые компоненты:</p>
+<ul>
+<li><strong>Библиотеки</strong> (например, <code>glibc</code>) — обёртки над syscalls;</li>
+<li><strong>Оболочка</strong> (<code>bash</code>, <code>zsh</code>) — интерфейс пользователя с системой;</li>
+<li><strong>Демоны</strong> (<code>sshd</code>, <code>cron</code>, <code>nginx</code>) — фоновые службы.</li>
+</ul>
+<h3 id="_1">🔄 Взаимодействие между пространствами</h3>
+<ol>
+<li>Действие в пространстве пользователя.</li>
+<li>Системный вызов(syscalls).</li>
+<li>Выполнение системного вызова в пространстве ядра.</li>
+<li>Отправка ответа в пространство пользователя.</li>
+</ol>
+<hr />
+<h2 id="_2">🏗️ Основные компоненты системы</h2>
+<p>Linux — это не только ядро, но и множество надстроек, которые формируют полноценную операционную систему.
+После запуска ядра управление передаётся в пространство пользователя, где начинает действовать <strong>init-система</strong>, запускаются фоновые сервисы, пользовательские оболочки, библиотеки и другие элементы.
+Все эти компоненты логически связаны и формируют каркас, на котором работают приложения.</p>
+<h3 id="kernel">🧩 Ядро (Kernel)</h3>
+<p><strong>Ядро</strong> — центральный компонент, работающий в привилегированном режиме (Ring 0).
+Оно управляет ресурсами, планирует процессы, обрабатывает системные вызовы и изолирует процессы.</p>
+<p>📌 <strong>Ключевые особенности ядра</strong>:</p>
+<ul>
+<li><strong>Монолитное</strong> — все подсистемы работают в общем адресном пространстве;</li>
+<li><strong>Модулируемое</strong> — поддержка загружаемых модулей (<code>*.ko</code>) без необходимости пересборки;</li>
+<li>
+<p><strong>Интерфейсы взаимодействия</strong>:</p>
+<ul>
+<li><code>/proc/sys/</code> — параметры ядра;</li>
+<li><code>sysctl</code> — настройка в рантайме;</li>
+<li><code>syscalls</code> — механизм взаимодействия приложений с ядром.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава о ядре доступна <a href="./kernel.md">здесь</a>.</p>
+</div>
+<h3 id="init-pid-1">🔄 Init-система (PID 1)</h3>
+<p><code>init</code> — первый пользовательский процесс (<code>PID 1</code>) после загрузки ядра.</p>
+<p>Он запускает остальные сервисы, управляет их зависимостями и жизненным циклом, то есть его задача — начать выполнение userspace-компонентов: сервисов, демонов, оболочек и пользовательских процессов.</p>
+<div class="admonition warning">
+<p class="admonition-title">Уникальность PID 1</p>
+<p>В любой системе только один процесс может иметь <strong>PID 1</strong> — он несёт ответственность за запуск остальных и за усыновление осиротевших процессов.</p>
+</div>
+<p>📌 <strong>Эволюция</strong>:</p>
+<ul>
+<li><code>SysVinit</code>, <code>Upstart</code>, <code>Systemd</code> (стандарт в современных дистрибутивах);</li>
+<li>Службы запускаются как <strong>юниты</strong>, а systemd отслеживает их состояния, перезапускает при сбоях, и связывает зависимости.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава о системах инициализации доступна <a href="./sysinit.md">здесь</a>.</p>
+</div>
+<h3 id="_3">📚 Оболочка и библиотеки</h3>
+<p>🐚 <strong>Оболочки</strong> (<code>bash</code>, <code>zsh</code>) — это пользовательский интерфейс для запуска команд и скриптов, который взаимодействует с ядром через <strong>системные вызовы</strong>, используя библиотеки.</p>
+<p>📦 <strong>Библиотеки</strong> (<code>glibc</code>, <code>musl</code>) — предоставляют стандартные функции, реализующие системные вызовы, ввод-вывод, работу с памятью и т.д.</p>
+<p><strong>Пример (C# → libc → ядро):</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Про системные вызовы в C#</p>
+<p>Данная глава не посвящена системным вызовам C#, как и весь раздел.</p>
+<p>Работа с <strong>системными вызовами</strong> и <strong>P/Invoke</strong> в C# описывается <a href="../csharp/syscall.md">здесь</a>.</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">using</span><span class="w"> </span><span class="nn">System</span><span class="p">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">System.Runtime.InteropServices</span><span class="p">;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">using</span><span class="w"> </span><span class="nn">System.Text</span><span class="p">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">Program</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">{</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="c1">// Импорт системного вызова write() из libc (аналог glibc в C)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="na">[DllImport(&quot;libc&quot;, SetLastError = true)]</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">extern</span><span class="w"> </span><span class="n">IntPtr</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">fd</span><span class="p">,</span><span class="w"> </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">IntPtr</span><span class="w"> </span><span class="n">count</span><span class="p">);</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Main</span><span class="p">()</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">        </span><span class="c1">// 🔹 Переводим строку в массив байтов (UTF-8)</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">        </span><span class="kt">byte</span><span class="p">[]</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Encoding</span><span class="p">.</span><span class="n">UTF8</span><span class="p">.</span><span class="n">GetBytes</span><span class="p">(</span><span class="s">&quot;Hello from syscall!\n&quot;</span><span class="p">);</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">        </span><span class="c1">// 🔹 Пишем напрямую в stdout (fd = 1)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">        </span><span class="n">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">IntPtr</span><span class="p">)</span><span class="n">bytes</span><span class="p">.</span><span class="n">Length</span><span class="p">);</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="c1">// ↘ Переход из Ring 3 → Ring 0 через системный вызов write()</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="c1">// ↘ Ядро Linux обрабатывает и выводит данные в терминал</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="p">}</span>
+</code></pre></div>
+<p>Вывод: </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Hello from syscall!
+</code></pre></div>
+<p>Таким образом, оболочки и библиотеки формируют <strong>интерфейс между пользователем и ядром</strong>, и именно через них происходит выполнение всех команд и программ.</p>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава об оболочке(<strong>Bash</strong>) доступна <a href="./shell.md">здесь</a>.</p>
+</div>
+<h3 id="logind-">👥 Logind - система управления сессиями</h3>
+<p><code>logind</code> — это демон, входящий в состав <code>systemd</code>, отвечающий за <strong>управление пользовательскими сессиями</strong>, терминалами, блокировкой экрана, переходом в спящий режим и другими пользовательскими событиями.</p>
+<p>Он стал <strong>важнейшим компонентом архитектуры</strong> вместо устаревших <code>ConsoleKit</code>, <code>acpid</code>, <code>ck-launch-session</code> и др.</p>
+<p>Возможности <code>logind</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Возможность</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Управление сессиями</td>
+<td>Отслеживает логины, открытие терминалов, запуск графических оболочек</td>
+</tr>
+<tr>
+<td>Поддержка multi-seat</td>
+<td>Позволяет нескольким пользователям работать параллельно (несколько экранов и клавиатур)</td>
+</tr>
+<tr>
+<td>Подключение/отключение</td>
+<td>Обработка событий suspend, resume, lid close, и т.п.</td>
+</tr>
+<tr>
+<td>Блокировка экрана</td>
+<td>Сигналы GUI-оболочкам о необходимости блокировки (например, при <code>sleep</code>)</td>
+</tr>
+<tr>
+<td>Интеграция с PAM</td>
+<td>Автоматически создает/удаляет сессию при входе/выходе пользователя</td>
+</tr>
+<tr>
+<td>Интеграция с Polkit</td>
+<td>Определяет, какие действия доступны пользователю (напр. shutdown)</td>
+</tr>
+<tr>
+<td>IPC через D-Bus</td>
+<td>Предоставляет интерфейс для взаимодействия с оболочками и скриптами</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава о сессиях доступна <a href="./sessions.md">здесь</a>.</p>
+</div>
+<h3 id="_4">🔐 Механизмы доступа и аутентификации</h3>
+<p>В многопользовательской системе Linux важнейшим элементом архитектуры являются компоненты, <strong>контролирующие доступ</strong> — как на уровне входа в систему, так и при выполнении чувствительных операций.</p>
+<h4 id="pam-pluggable-authentication-modules">🛂 PAM (Pluggable Authentication Modules)</h4>
+<p><strong>PAM</strong> — первая точка, где обрабатывается доступ пользователя к системе.
+При попытке входа (через <code>login</code>, <code>sudo</code>, <code>sshd</code>, <code>gdm</code> и т.д.), <strong>инициирующий процесс вызывает PAM</strong>, который в свою очередь:</p>
+<ul>
+<li>Запускает цепочку модулей (например, <code>pam_unix</code>, <code>pam_tally</code>, <code>pam_ldap</code>);</li>
+<li>Выполняет проверку по нужным политикам;</li>
+<li>Возвращает разрешение или отказ на вход.</li>
+</ul>
+<p>🧩 Архитектурно PAM является <strong>прослойкой между user-space программами и механизмами проверки учетных данных</strong>, конфигурируемой через <code>/etc/pam.d/</code>.</p>
+<h4 id="polkit">🛡️ Polkit</h4>
+<p><strong>Polkit (PolicyKit)</strong> — компонент, отвечающий за <strong>управление доступом к привилегированным операциям</strong>, которые <strong>не требуют полного <code>sudo</code></strong>, но всё же чувствительны (например, монтирование USB-диска в GUI, перезапуск <code>nginx</code> из GNOME Settings).</p>
+<ul>
+<li>Работает в связке с <code>dbus</code>;</li>
+<li>Запрос приходит от процесса пользователя через dbus → попадает в <code>polkitd</code>;</li>
+<li>Polkit запрашивает у пользователя подтверждение или проверяет правила доступа (<code>*.policy</code>).</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава о пользователях и механизмах доступа доступна <a href="./users-and-auth.md">здесь</a>.</p>
+</div>
+<h3 id="auditd">🧾 Auditd — система аудита безопасности</h3>
+<p><code>auditd</code> — демон, который мониторит и записывает события безопасности (попытки входа, доступ к файлам, изменения прав, запуск программ и т. д.).</p>
+<ul>
+<li>Использует <strong>ядро Linux</strong> и специальный syscall <code>audit()</code>;</li>
+<li>Логирует: <code>auth.log</code>, <code>audit.log</code>;</li>
+<li>Поддерживает фильтрацию, метки пользователей, ключи событий и даже real-time интеграцию;</li>
+<li>Иёмеется возможность интеграции с такими системами как <code>AppArmor</code> и <code>SELinux</code>.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава о механизмах безопасности доступна <a href="./security.md">здесь</a>.</p>
+</div>
+<h3 id="udev-">⚙️ Udev - менеджер устройств</h3>
+<p><code>udev</code> — это <strong>менеджер устройств в userspace</strong>, работающий поверх событий от ядра (через netlink).
+Udev играет ключевую роль в сборке <code>/dev</code>, интеграции устройств с десктопом, автоматическом монтировании и работе драйверов.</p>
+<p>Когда подключается новое устройство, ядро сообщает об этом, и:</p>
+<ul>
+<li><code>udevd</code> получает событие;</li>
+<li>Срабатывают правила из <code>/etc/udev/rules.d/</code>;</li>
+<li>Создаются нужные узлы (<code>/dev/sda</code>, <code>/dev/input/*</code>) и выставляются права.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава о работе устройств в Linux доступна <a href="./devices.md">здесь</a>.</p>
+</div>
+<h3 id="d-bus-">🔗 D-Bus - механизм межпроцессного взаимодействия</h3>
+<p><strong>D-Bus (Desktop Bus)</strong> — это <strong>механизм межпроцессного взаимодействия</strong> (IPC), <strong>центральный транспорт</strong>, склеивающий вместе <code>systemd</code>, <code>polkit</code>, <code>logind</code> и многих других, с помощью которого:</p>
+<ul>
+<li>Системные службы (<code>systemd</code>, <code>logind</code>, <code>NetworkManager</code>, <code>udisks2</code>) могут общаться между собой и с GUI-программами;</li>
+<li>Polkit получает запросы от GUI;</li>
+<li>logind оповещает десктоп, что пользователь вышел из системы;</li>
+<li>Пользовательское приложение может попросить systemd перезапустить сервис.</li>
+</ul>
+<p>D-Bus работает как <strong>шина сообщений</strong>, к которой подключаются процессы:</p>
+<ul>
+<li><strong>system bus</strong> — для системных демонов;</li>
+<li><strong>session bus</strong> — для пользовательских приложений.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Подробнее</p>
+<p>Отдельная глава о механизме межпроцессного взаимодействия доступна <a href="./dbus.md">здесь</a>.</p>
+</div>
+<h3 id="_5">🔎 Итоговая картина: кто за что отвечает</h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Роль в системе</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Kernel</code></td>
+<td>Драйверы, память, процессы, syscalls</td>
+</tr>
+<tr>
+<td><code>Init</code> (PID 1)</td>
+<td>Запуск userspace, контроль зависимостей</td>
+</tr>
+<tr>
+<td><code>Shell</code></td>
+<td>Запуск команд, скрипты</td>
+</tr>
+<tr>
+<td><code>glibc</code></td>
+<td>Обёртки для системных вызовов, stdlib</td>
+</tr>
+<tr>
+<td><code>PAM</code></td>
+<td>Аутентификация пользователей</td>
+</tr>
+<tr>
+<td><code>Polkit</code></td>
+<td>Авторизация привилегированных действий</td>
+</tr>
+<tr>
+<td><code>Udev</code></td>
+<td>Создание /dev/*, обработка hotplug</td>
+</tr>
+<tr>
+<td><code>AppArmor/SELinux</code></td>
+<td>Контроль доступа к ресурсам</td>
+</tr>
+<tr>
+<td><code>Auditd</code></td>
+<td>Логирование критических действий</td>
+</tr>
+<tr>
+<td><code>logind</code></td>
+<td>Управление сессиями</td>
+</tr>
+<tr>
+<td><code>dbus</code></td>
+<td>Связь между сервисами и приложениями</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">🧩 Взаимодействие компонентов в потоке авторизации</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Пользователь →
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  systemd запускает sshd →
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    PAM проверяет логин/пароль →
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>      Polkit проверяет действия →
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        udev создаёт устройства →
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>          ядро обрабатывает вызовы →
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>            Auditd логирует →
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>              D-Bus уведомляет GUI/службы
+</code></pre></div>
+<hr />
+<h2 id="_7">🧭 Что дальше</h2>
+<ol>
+<li>Узнайте какая у вас система инициализации.</li>
+<li>Просмотрите содержимое директории <code>/proc</code>.</li>
+<li>Выполните команду <code>strace -c ls /tmp</code>, что она выводит?</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  К началу
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Справочник C#/.NET разработчика — <a href="#__consent">Изменить настройки cookies</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Использование cookies</h4>
+<p>Мы используем cookies для распознавания ваших повторных посещений и предпочтений, а также для измерения эффективности нашей документации и того, насколько легко пользователи находят нужную информацию. Согласившись, вы помогаете нам сделать сайт лучше и удобнее.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+    
+    
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Принять</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Управлять настройками</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tabs", "navigation.top", "navigation.tracking", "navigation.sections", "search.suggest", "header.autohide", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
