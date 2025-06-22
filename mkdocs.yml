@@ -59,3 +59,36 @@ markdown_extensions:
   - pymdownx.mark
 nav:
   - Главная: index.md
+  - 🐧 GNU/Linux:
+      - linux/introduction.md
+      - linux/architecture.md
+      # - linux/kernel.md
+      # - linux/sysinit.md
+      # - linux/processes.md
+      # - linux/memory-manager.md
+      # - linux/shell.md
+      # - linux/users-and-auth.md
+      # - linux/devices.md
+      # - linux/dbus.md
+      # - linux/security.md
+      # - linux/filesystem.md
+      # - linux/partitions-and-volumes.md
+      # - linux/network.md
+      # - linux/graphics-system.md
+      # - linux/backups.md
+      # - linux/pxe.md
+      # - linux/linux-from-scratch.md
+      # - 🔩 Аппаратная архитектура:
+      #     - linux/firmware/architecture.md
+      #     - linux/firmware/bios.md
+      #     - linux/firmware/boot.md
+      #     - linux/firmware/bus.md
+      #     - linux/firmware/cpu.md
+      #     - linux/firmware/cpu-cache.md
+      #     - linux/firmware/devices.md
+      #     - linux/firmware/ram.md
+      #     - linux/firmware/memory-management.md
+      #     - linux/firmware/storage.md
+      #     - linux/firmware/network.md
+      #     - linux/firmware/security.md
+      #     - linux/firmware/bmc.md
